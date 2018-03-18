@@ -1,0 +1,199 @@
+NODES TEXT FILE
+
+id  :
+name:
+even:
+endeven
+endnode
+
+id  : swapR0S1Node
+name: Learn the Controls
+even:
+swapR0S1Event
+endeven
+endnode
+
+id  : gotoR1IntroNode
+name: Start the Game
+even:
+gotoR1IntroEvent
+endeven
+endnode
+
+id  : swapR1S2Node
+name: Walk over to your Desk...
+even:
+swapR1S2Event
+endeven
+endnode
+
+id  : swapR1S3Node
+name: Look over your Stuff
+even:
+swapR1S3Event
+endeven
+endnode
+
+id  : swapR1S31Node
+name: Look at the Picture on your Desk
+even:
+swapR1S31Event
+endeven
+endnode
+
+id  : swapR1S32Node
+name: Look at the Case File
+even:
+swapR1S32Event
+endeven
+endnode
+
+id  : swapR1S321Node
+name: Continue...
+even:
+swapR1S321Event
+endeven
+endnode
+
+id  : swapR1S322Node
+name: Continue...
+even:
+swapR1S322Event
+swapR2S2Event
+endeven
+endnode
+
+id  : swapR1S33Node
+name: Read the Letter Revoking your License to Kill
+even:
+swapR1S33Event
+endeven
+endnode
+
+id  : swapR1S331Node
+name: Contemplate on the Matter...
+even:
+swapR1S331Event
+endeven
+endnode
+
+id  : swapR1S34Node
+name: Open the Unopened Letter Instating your License to Maim
+even:
+swapR1S34Event
+endeven
+endnode
+
+id  : swapR1S341Node
+name: Read the Letter...
+even:
+swapR1S341Event
+nodeOpenLetterEvent
+endeven
+endnode
+
+id  : gotoR2Node
+name: Head out to the Hallway
+even:
+gotoR2Event
+swapR1S3Event
+endeven
+endnode
+
+id  : gotoR1Node
+name: Head into your Office
+even:
+gotoR1Event
+endeven
+endnode
+
+id  : gotoR3Node
+name: Descend the stairs to your Hotrod
+even:
+gotoR3Event
+endeven
+endnode
+
+id  : gotoR5Node
+name: Enter the Night Market Commons
+even:
+gotoR5Event
+endeven
+endnode
+
+id  : swapR3S2Node
+name: Drive out of Here
+even:
+swapR3S2Event
+endeven
+endnode
+
+id  : swapR3S3Node
+name: Keep Driving
+even:
+swapR3S3Event
+endeven
+endnode
+
+id  : gotoR4Node
+name: Keep Driving
+even:
+gotoR4Event
+endeven
+endnode
+
+id  : swapR4S2Node
+name: Scope out the Entrance
+even:
+swapR4S2Event
+endeven
+endnode
+
+id  : swapR4S3Node
+name: Sneak past the triggermen
+even:
+swapR4S3Event
+endeven
+endnode
+
+id  : swapR4S4Node
+name: Convince them you’re one of the boys.
+even:
+swapR4S4Event
+endeven
+endnode
+
+id  : swapR4S5Node
+name: Walk in like it’s no problem, after all the night market is a public institution and wouldn’t want their business obstructed by holligans.
+even:
+swapR4S5Event
+endeven
+endnode
+
+id  : swapR4S6Node
+name: Give the Secret Knock
+even:
+swapR4S6Event
+endeven
+endnode
+
+id  : swapR4S7Node
+name: Give the Secret Password
+even:
+swapR4S7Event
+endeven
+endnode
+
+id  : swapR4S8Node
+name: Descend the Stairs to the Night Market
+even:
+swapR4S8Event
+endeven
+endnode
+
+id  : printTestNode
+name: Prints maybe?
+even:
+testEvent
+endeven
+ENDNODES

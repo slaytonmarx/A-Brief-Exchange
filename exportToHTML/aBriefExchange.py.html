@@ -1,0 +1,356 @@
+<html>
+<head>
+<title>aBriefExchange.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+aBriefExchange.py</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">import </span><span class="s1">tkinter; 
+ 
+ 
+</span><span class="s2"># Classes</span><span class="s1"> 
+ 
+</span><span class="s0">class </span><span class="s1">entity(object): 
+    </span><span class="s0">def </span><span class="s1">idSetter(self): 
+        self.ID = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+ 
+    </span><span class="s0">def </span><span class="s1">nameSetter(self): 
+        self.name = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">archive(object): 
+    </span><span class="s0">def </span><span class="s1">currentRoomSetter(self): 
+        self.currentRoom = </span><span class="s3">&quot;room0&quot;</span><span class="s1">; 
+ 
+    </span><span class="s0">def </span><span class="s1">eventsDict(self): 
+        self.events = {}; 
+ 
+    </span><span class="s0">def </span><span class="s1">nodesDict(self): 
+        self.nodes = {}; 
+ 
+    </span><span class="s0">def </span><span class="s1">scenesDict(self): 
+        self.scenes = {}; 
+ 
+    </span><span class="s0">def </span><span class="s1">roomsDict(self): 
+        self.rooms = {}; 
+ 
+ 
+</span><span class="s2"># room - room inherits from entity giving it a name and an id. Rooms are what the player interacts</span><span class="s1"> 
+</span><span class="s2"># with directly. They contain scenes which the player sees. For example, room1 may be called &quot;The Grato&quot;</span><span class="s1"> 
+</span><span class="s2"># in the first scene of &quot;The Grato&quot; the player encounters a gang of pirates, in the second scene of</span><span class="s1"> 
+</span><span class="s2"># The Grato the player may have dealt with the pirates and now the Grato is empty.</span><span class="s1"> 
+</span><span class="s0">class </span><span class="s1">room(entity): 
+    </span><span class="s0">def </span><span class="s1">sceneSetter(self): 
+        self.roomScenes = []; 
+ 
+    </span><span class="s0">def </span><span class="s1">currentSceneSetter(self): 
+        self.currentScene = </span><span class="s4">0</span><span class="s1">; 
+ 
+ 
+</span><span class="s2"># scene - scene inherits from entity giving it a name and an id. It contains a list of nodes which the player</span><span class="s1"> 
+</span><span class="s2"># can interact with, as well as a description of the room it takes place in.</span><span class="s1"> 
+</span><span class="s0">class </span><span class="s1">scene(entity): 
+    </span><span class="s0">def </span><span class="s1">textSetter(self): 
+        self.text = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+ 
+    </span><span class="s0">def </span><span class="s1">nodeSetter(self): 
+        self.sceneNodes = []; 
+ 
+    </span><span class="s0">def </span><span class="s1">examSetter(self): 
+        self.examine = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">node(entity): 
+    </span><span class="s0">def </span><span class="s1">eventsSetter(self): 
+        self.nodeEvents = []; 
+ 
+    </span><span class="s0">def </span><span class="s1">activateNode(self, arch): 
+        </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(len(self.nodeEvents)): 
+            self.nodeEvents[i].activate(arch); 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">event(entity): 
+    </span><span class="s0">def </span><span class="s1">activeSetter(self): 
+        self.active = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+ 
+    </span><span class="s0">def </span><span class="s1">activate(self, arch): 
+        </span><span class="s2"># Test in Code</span><span class="s1"> 
+        parsedEffect = self.active.split(); 
+        </span><span class="s2"># swap roomID sceneID</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">parsedEffect[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">&quot;swap&quot;</span><span class="s1">: 
+            roomRef = arch.rooms[parsedEffect[</span><span class="s4">1</span><span class="s1">]]; 
+            roomRef.currentScene = int(parsedEffect[</span><span class="s4">2</span><span class="s1">]); 
+        </span><span class="s0">if </span><span class="s1">parsedEffect[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">&quot;goto&quot;</span><span class="s1">: 
+            arch.currentRoom = parsedEffect[</span><span class="s4">1</span><span class="s1">]; 
+        </span><span class="s0">if </span><span class="s1">parsedEffect[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">&quot;print&quot;</span><span class="s1">: 
+            print(parsedEffect[</span><span class="s4">1</span><span class="s1">]); 
+        </span><span class="s0">if </span><span class="s1">parsedEffect[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">&quot;node&quot;</span><span class="s1">: 
+            </span><span class="s2"># node roomID sceneID nodeNumber eventNum NewEventID</span><span class="s1"> 
+            roomRef = arch.rooms[parsedEffect[</span><span class="s4">1</span><span class="s1">]]; 
+            activeNode = roomRef.roomScenes[int(parsedEffect[</span><span class="s4">2</span><span class="s1">])].sceneNodes[int(parsedEffect[</span><span class="s4">3</span><span class="s1">])]; 
+            activeNode.name = self.name; 
+            activeNode.nodeEvents[int(parsedEffect[</span><span class="s4">4</span><span class="s1">])] = arch.events[parsedEffect[</span><span class="s4">5</span><span class="s1">]]; 
+ 
+ 
+</span><span class="s2"># Methods</span><span class="s1"> 
+</span><span class="s0">def </span><span class="s1">main(): 
+    main_window = App(); 
+ 
+ 
+</span><span class="s2"># eventScrivner - returns a dictionary of events, events read from a file called events.txt</span><span class="s1"> 
+</span><span class="s0">def </span><span class="s1">eventScrivner(): 
+    inFile = open(</span><span class="s3">&quot;events.txt&quot;</span><span class="s1">, </span><span class="s3">&quot;r&quot;</span><span class="s1">); 
+    line = inFile.readline().rstrip(); 
+    events = {}; 
+    </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;ENDEVENTS&quot;</span><span class="s1">: 
+        line = inFile.readline().rstrip(); 
+        tempEvent = event(); 
+        tempEvent.idSetter(); 
+        tempEvent.nameSetter(); 
+        tempEvent.activeSetter(); 
+        </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endevent&quot; </span><span class="s0">and </span><span class="s1">line != </span><span class="s3">&quot;ENDEVENTS&quot;</span><span class="s1">: 
+            </span><span class="s2"># print(line);</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;id  :&quot;</span><span class="s1">: 
+                tempEvent.ID = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;name:&quot;</span><span class="s1">: 
+                tempEvent.name = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;acti:&quot;</span><span class="s1">: 
+                tempEvent.active = line[</span><span class="s4">6</span><span class="s1">:]; 
+            line = inFile.readline().rstrip(); 
+        events[tempEvent.ID] = tempEvent; 
+    inFile.close(); 
+    </span><span class="s0">return </span><span class="s1">events; 
+ 
+ 
+</span><span class="s2"># nodeScrivner - returns a dictionary of nodes.</span><span class="s1"> 
+</span><span class="s0">def </span><span class="s1">nodeScrivner(archNodes): 
+    inFile = open(</span><span class="s3">&quot;nodes.txt&quot;</span><span class="s1">, </span><span class="s3">&quot;r&quot;</span><span class="s1">); 
+    line = inFile.readline().rstrip(); 
+    nodes = {}; 
+    </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;ENDNODES&quot;</span><span class="s1">: 
+        </span><span class="s2"># print(line);</span><span class="s1"> 
+        line = inFile.readline().rstrip(); 
+        tempNode = node(); 
+        tempNode.idSetter(); 
+        tempNode.nameSetter(); 
+        tempNode.eventsSetter(); 
+        </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endnode&quot; </span><span class="s0">and </span><span class="s1">line != </span><span class="s3">&quot;ENDNODES&quot;</span><span class="s1">: 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;id  :&quot;</span><span class="s1">: 
+                tempNode.ID = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;name:&quot;</span><span class="s1">: 
+                tempNode.name = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;even:&quot;</span><span class="s1">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endeven&quot;</span><span class="s1">: 
+                    </span><span class="s2"># print(line);</span><span class="s1"> 
+                    tempNode.nodeEvents.append(archNodes.events[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        nodes[tempNode.ID] = tempNode; 
+    inFile.close(); 
+    </span><span class="s0">return </span><span class="s1">nodes; 
+ 
+ 
+</span><span class="s0">def </span><span class="s1">sceneScrivner(archScenes): 
+    inFile = open(</span><span class="s3">&quot;scenes.txt&quot;</span><span class="s1">, </span><span class="s3">&quot;r&quot;</span><span class="s1">); 
+    line = inFile.readline().rstrip(); 
+    scenes = {}; 
+    </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;ENDSCENES&quot;</span><span class="s1">: 
+        line = inFile.readline().rstrip(); 
+        tempScene = scene(); 
+        tempScene.idSetter(); 
+        tempScene.nameSetter(); 
+        tempScene.textSetter(); 
+        tempScene.nodeSetter(); 
+        tempScene.examSetter(); 
+        </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endscene&quot; </span><span class="s0">and </span><span class="s1">line != </span><span class="s3">&quot;ENDSCENES&quot;</span><span class="s1">: 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;id  :&quot;</span><span class="s1">: 
+                tempScene.ID = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;name:&quot;</span><span class="s1">: 
+                tempScene.name = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;text:&quot;</span><span class="s1">: 
+                tempScene.text = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;exam:&quot;</span><span class="s1">: 
+                tempScene.examine = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;node:&quot;</span><span class="s1">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endnodes&quot;</span><span class="s1">: 
+                    </span><span class="s2"># print(line);</span><span class="s1"> 
+                    tempScene.sceneNodes.append(archScenes.nodes[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        scenes[tempScene.ID] = tempScene; 
+    inFile.close(); 
+    </span><span class="s0">return </span><span class="s1">scenes; 
+ 
+ 
+</span><span class="s0">def </span><span class="s1">roomScrivner(archRooms): 
+    inFile = open(</span><span class="s3">&quot;rooms.txt&quot;</span><span class="s1">, </span><span class="s3">&quot;r&quot;</span><span class="s1">); 
+    line = inFile.readline().rstrip(); 
+    rooms = {}; 
+    </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;ENDROOMS&quot;</span><span class="s1">: 
+        line = inFile.readline().rstrip(); 
+        tempRoom = room(); 
+        tempRoom.idSetter(); 
+        tempRoom.nameSetter(); 
+        tempRoom.sceneSetter(); 
+        tempRoom.currentSceneSetter(); 
+        </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endroom&quot; </span><span class="s0">and </span><span class="s1">line != </span><span class="s3">&quot;ENDROOMS&quot;</span><span class="s1">: 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;id  :&quot;</span><span class="s1">: 
+                tempRoom.ID = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;name:&quot;</span><span class="s1">: 
+                tempRoom.name = line[</span><span class="s4">6</span><span class="s1">:]; 
+            </span><span class="s0">if </span><span class="s1">line[</span><span class="s4">0</span><span class="s1">:</span><span class="s4">5</span><span class="s1">] == </span><span class="s3">&quot;scen:&quot;</span><span class="s1">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s0">while </span><span class="s1">line != </span><span class="s3">&quot;endscenes&quot;</span><span class="s1">: 
+                    </span><span class="s2"># print(line);</span><span class="s1"> 
+                    tempRoom.roomScenes.append(archRooms.scenes[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        rooms[tempRoom.ID] = tempRoom; 
+    inFile.close(); 
+    </span><span class="s0">return </span><span class="s1">rooms; 
+ 
+ 
+</span><span class="s0">class </span><span class="s1">App: 
+    </span><span class="s0">def </span><span class="s1">__init__(self): 
+        </span><span class="s2"># Main Window Related:</span><span class="s1"> 
+        self.main_window = tkinter.Tk(); 
+        self.main_window.geometry(</span><span class="s3">&quot;1120x600&quot;</span><span class="s1">); 
+        self.mainTextString = tkinter.StringVar(); 
+        self.secTextString = tkinter.StringVar(); 
+        self.roomTextString = tkinter.StringVar(); 
+        </span><span class="s2"># Frame Related</span><span class="s1"> 
+        </span><span class="s2"># Border decoration. The default is FLAT. Other possible values are SUNKEN, RAISED, GROOVE, and RIDGE.</span><span class="s1"> 
+        self.titleFrame = tkinter.Frame(self.main_window, borderwidth=</span><span class="s4">5</span><span class="s1">, relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">); 
+        self.titleFrame.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, padx=</span><span class="s4">10</span><span class="s1">, pady=</span><span class="s4">5</span><span class="s1">, sticky=</span><span class="s3">'w'</span><span class="s1">); 
+ 
+        </span><span class="s2"># Main Text Frame</span><span class="s1"> 
+        self.textFrame = tkinter.Frame(self.main_window, borderwidth=</span><span class="s4">5</span><span class="s1">, relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">, width=</span><span class="s4">1100</span><span class="s1">, height=</span><span class="s4">500</span><span class="s1">); 
+        self.textFrame.grid(row=</span><span class="s4">2</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, columnspan=</span><span class="s4">6</span><span class="s1">, padx=</span><span class="s4">10</span><span class="s1">, pady=</span><span class="s4">5</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">, </span><span class="s3">&quot;e&quot;</span><span class="s1">)); 
+ 
+        </span><span class="s2"># Choice Frame</span><span class="s1"> 
+        self.choiceFrame = tkinter.Frame(self.main_window, borderwidth=</span><span class="s4">5</span><span class="s1">, relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">); 
+        self.choiceFrame.grid(row=</span><span class="s4">4</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, columnspan=</span><span class="s4">6</span><span class="s1">, padx=</span><span class="s4">10</span><span class="s1">, pady=</span><span class="s4">5</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">, </span><span class="s3">&quot;e&quot;</span><span class="s1">)) 
+ 
+        </span><span class="s2"># Input Frame</span><span class="s1"> 
+        self.interactionFrame = tkinter.Frame(self.main_window); 
+        self.interactionFrame.grid(row=</span><span class="s4">5</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">), padx=</span><span class="s4">10</span><span class="s1">); 
+ 
+        </span><span class="s2"># Label Related</span><span class="s1"> 
+        self.titleLabel = tkinter.Label(self.titleFrame, text=</span><span class="s3">&quot;A BRIEF EXCHANGE&quot;</span><span class="s1">, width=</span><span class="s4">16</span><span class="s1">); 
+        self.titleLabel.config(font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">24</span><span class="s1">)); 
+        self.titleLabel.pack(side=</span><span class="s3">&quot;left&quot;</span><span class="s1">); 
+ 
+        self.choiceLabel = tkinter.Label(self.main_window, text=</span><span class="s3">&quot;Your Choices:&quot;</span><span class="s1">) 
+        self.choiceLabel.config(font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">16</span><span class="s1">)); 
+        self.choiceLabel.grid(row=</span><span class="s4">3</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, sticky=</span><span class="s3">&quot;w&quot;</span><span class="s1">, padx=</span><span class="s4">10</span><span class="s1">); 
+ 
+        self.choiceLabel = tkinter.Label(self.main_window, textvariable=self.roomTextString) 
+        self.choiceLabel.config(font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">16</span><span class="s1">)); 
+        self.choiceLabel.grid(row=</span><span class="s4">1</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">), padx=</span><span class="s4">10</span><span class="s1">); 
+ 
+        </span><span class="s2"># Text Related11</span><span class="s1"> 
+        self.mainText = tkinter.Message(self.textFrame, width=</span><span class="s4">1090</span><span class="s1">, textvariable=self.mainTextString); 
+        self.mainText.config(font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">18</span><span class="s1">)); 
+        self.mainText.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">)); 
+ 
+        self.secText = tkinter.Message(self.choiceFrame, width=</span><span class="s4">1090</span><span class="s1">, textvariable=self.secTextString) 
+        self.secText.config(font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">16</span><span class="s1">)); 
+        self.secText.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">, sticky=(</span><span class="s3">&quot;w&quot;</span><span class="s1">), padx=</span><span class="s4">10</span><span class="s1">); 
+ 
+        </span><span class="s2"># Input Related</span><span class="s1"> 
+        self.entry = tkinter.Entry(self.interactionFrame, width=</span><span class="s4">10</span><span class="s1">); 
+        self.entry.config(relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">, borderwidth=</span><span class="s4">2</span><span class="s1">, font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">18</span><span class="s1">, </span><span class="s3">&quot;bold&quot;</span><span class="s1">)); 
+        self.entry.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">0</span><span class="s1">); 
+        self.contBut = tkinter.Button(self.interactionFrame, text=</span><span class="s3">&quot;Engage&quot;</span><span class="s1">, command=self.activate); 
+        self.contBut.config(relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">, borderwidth=</span><span class="s4">2</span><span class="s1">, font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">18</span><span class="s1">, </span><span class="s3">&quot;bold&quot;</span><span class="s1">)); 
+        self.contBut.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">1</span><span class="s1">); 
+        self.quit = tkinter.Button(self.interactionFrame, text=</span><span class="s3">&quot;Quit&quot;</span><span class="s1">, command=self.main_window.destroy); 
+        self.quit.config(relief=</span><span class="s3">&quot;groove&quot;</span><span class="s1">, borderwidth=</span><span class="s4">2</span><span class="s1">, font=(</span><span class="s3">&quot;Cambria&quot;</span><span class="s1">, </span><span class="s4">18</span><span class="s1">, </span><span class="s3">&quot;bold&quot;</span><span class="s1">)) 
+        self.quit.grid(row=</span><span class="s4">0</span><span class="s1">, column=</span><span class="s4">2</span><span class="s1">); 
+ 
+        console = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+        self.arch = archive(); 
+        self.arch.currentRoomSetter(); 
+        self.arch.events = eventScrivner(); 
+        self.arch.nodes = nodeScrivner(self.arch); 
+        self.arch.scenes = sceneScrivner(self.arch); 
+        self.arch.rooms = roomScrivner(self.arch); 
+        self.load(self.arch, self.arch.currentRoom); 
+        </span><span class="s2"># while console != &quot;q&quot;:</span><span class="s1"> 
+        </span><span class="s2">#    load(arch,arch.currentRoom);</span><span class="s1"> 
+        </span><span class="s2">#    console = input(&quot;\nWhat do you do?\n&quot;);</span><span class="s1"> 
+        </span><span class="s2">#</span><span class="s1"> 
+        tkinter.mainloop(); 
+ 
+    </span><span class="s0">def </span><span class="s1">activate(self): 
+        ourArchive = self.arch; 
+        playerInput = self.entry.get(); 
+        </span><span class="s2"># self.mainTextString.set(playerInput);</span><span class="s1"> 
+        self.load(ourArchive, ourArchive.currentRoom); 
+        </span><span class="s0">try</span><span class="s1">: 
+            choiceNum = int(playerInput); 
+            </span><span class="s2"># playerChoice translates choice num into the</span><span class="s1"> 
+            </span><span class="s2"># index of the option the player selected.</span><span class="s1"> 
+            playerChoice = int(choiceNum) - </span><span class="s4">1</span><span class="s1">; 
+            theScene = ourArchive.rooms[ourArchive.currentRoom].roomScenes[ 
+                ourArchive.rooms[ourArchive.currentRoom].currentScene] 
+            </span><span class="s0">if </span><span class="s1">playerChoice == len(theScene.sceneNodes): 
+                </span><span class="s0">if </span><span class="s1">theScene.examine != </span><span class="s3">&quot;&quot;</span><span class="s1">: 
+                    self.mainTextString.set(theScene.examine); 
+                    self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+                </span><span class="s0">else</span><span class="s1">: 
+                    self.mainTextString.set(</span><span class="s3">&quot;The range was off. There is/are only &quot; </span><span class="s1">+ str(len( 
+                        theScene.sceneNodes)) + </span><span class="s3">&quot; choices in this scene, not including an examine option. Clear the entry box and hit continue to return to the previous scene.&quot;</span><span class="s1">); 
+                    self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+            </span><span class="s0">else</span><span class="s1">: 
+                theScene.sceneNodes[playerChoice].activateNode(ourArchive); 
+                self.load(self.arch, self.arch.currentRoom); 
+                self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+ 
+        </span><span class="s0">except </span><span class="s1">ValueError: 
+            </span><span class="s0">if </span><span class="s1">playerInput == </span><span class="s3">&quot;&quot;</span><span class="s1">: 
+                self.load(self.arch, self.arch.currentRoom); 
+                self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+            </span><span class="s0">else</span><span class="s1">: 
+                self.mainTextString.set(</span><span class="s3">&quot;Please enter the number of the option you want.&quot;</span><span class="s1">); 
+                self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+        </span><span class="s0">except </span><span class="s1">IndexError: 
+            self.mainTextString.set(</span><span class="s3">&quot;The range was off. There is/are only &quot; </span><span class="s1">+ str(len( 
+                theScene.sceneNodes)) + </span><span class="s3">&quot; choices in this scene, not including an examine option. Clear the entry box and hit continue to return to the previous scene.&quot;</span><span class="s1">); 
+            self.entry.delete(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">); 
+ 
+    </span><span class="s0">def </span><span class="s1">load(self, loadArch, loadArchRoom): 
+        thisRoom = loadArch.rooms[loadArchRoom]; 
+        thisScene = thisRoom.roomScenes[thisRoom.currentScene]; 
+        secText = </span><span class="s3">&quot;&quot;</span><span class="s1">; 
+        self.roomTextString.set(thisScene.name); 
+        self.mainTextString.set(thisScene.text); 
+        num = </span><span class="s4">1</span><span class="s1">; 
+        </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(thisScene.sceneNodes)): 
+            secText += (</span><span class="s3">&quot;</span><span class="s0">\t</span><span class="s3">&quot; </span><span class="s1">+ str(i + </span><span class="s4">1</span><span class="s1">) + </span><span class="s3">&quot;: &quot; </span><span class="s1">+ thisScene.sceneNodes[i].name + </span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">&quot;</span><span class="s1">); 
+            num += </span><span class="s4">1</span><span class="s1">; 
+        </span><span class="s0">if </span><span class="s1">thisScene.examine != </span><span class="s3">&quot;&quot;</span><span class="s1">: 
+            secText += (</span><span class="s3">&quot;</span><span class="s0">\t</span><span class="s3">&quot; </span><span class="s1">+ str(num) + </span><span class="s3">&quot;: Examine.&quot;</span><span class="s1">); 
+        self.secTextString.set(secText); 
+ 
+ 
+main(); 
+</span></pre>
+</body>
+</html>

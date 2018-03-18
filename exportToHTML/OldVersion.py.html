@@ -1,0 +1,249 @@
+<html>
+<head>
+<title>OldVersion.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { }
+.s1 { color: rgb(0,128,128); font-weight: bold; }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+OldVersion.py</FONT>
+</center></TD></TR></TABLE>
+<pre>
+
+<span class="s0">__author__ = </span><span class="s1">'Slayton'</span><span class="s0"> 
+</span><span class="s2"># Classes</span><span class="s0"> 
+ 
+</span><span class="s3">class </span><span class="s0">entity(object): 
+    </span><span class="s3">def </span><span class="s0">idSetter(self): 
+        self.ID = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+    </span><span class="s3">def </span><span class="s0">nameSetter(self): 
+        self.name = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+ 
+</span><span class="s3">class </span><span class="s0">archive(object): 
+    </span><span class="s3">def </span><span class="s0">currentRoomSetter(self): 
+        self.currentRoom = </span><span class="s1">&quot;room0&quot;</span><span class="s0">; 
+    </span><span class="s3">def </span><span class="s0">eventsDict(self): 
+        self.events = {}; 
+    </span><span class="s3">def </span><span class="s0">nodesDict(self): 
+        self.nodes = {}; 
+    </span><span class="s3">def </span><span class="s0">scenesDict(self): 
+        self.scenes = {}; 
+    </span><span class="s3">def </span><span class="s0">roomsDict(self): 
+        self.rooms = {}; 
+ 
+ 
+</span><span class="s2"># room - room inherits from entity giving it a name and an id. Rooms are what the player interacts</span><span class="s0"> 
+</span><span class="s2"># with directly. They contain scenes which the player sees. For example, room1 may be called &quot;The Grato&quot;</span><span class="s0"> 
+</span><span class="s2"># in the first scene of &quot;The Grato&quot; the player encounters a gang of pirates, in the second scene of</span><span class="s0"> 
+</span><span class="s2"># The Grato the player may have dealt with the pirates and now the Grato is empty.</span><span class="s0"> 
+</span><span class="s3">class </span><span class="s0">room(entity): 
+    </span><span class="s3">def </span><span class="s0">sceneSetter(self): 
+        self.roomScenes = []; 
+    </span><span class="s3">def </span><span class="s0">currentSceneSetter(self): 
+        self.currentScene = </span><span class="s4">0</span><span class="s0">; 
+ 
+</span><span class="s2"># scene - scene inherits from entity giving it a name and an id. It contains a list of nodes which the player</span><span class="s0"> 
+</span><span class="s2"># can interact with, as well as a description of the room it takes place in.</span><span class="s0"> 
+</span><span class="s3">class </span><span class="s0">scene(entity): 
+    </span><span class="s3">def </span><span class="s0">textSetter(self): 
+        self.text = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+    </span><span class="s3">def </span><span class="s0">nodeSetter(self): 
+        self.sceneNodes = []; 
+    </span><span class="s3">def </span><span class="s0">examSetter(self): 
+        self.examine = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+ 
+</span><span class="s3">class </span><span class="s0">node(entity): 
+    </span><span class="s3">def </span><span class="s0">eventsSetter(self): 
+        self.nodeEvents = []; 
+    </span><span class="s3">def </span><span class="s0">activateNode(self, arch): 
+        </span><span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s0">range(len(self.nodeEvents)): 
+            self.nodeEvents[i].activate(arch); 
+ 
+</span><span class="s3">class </span><span class="s0">event(entity): 
+    </span><span class="s3">def </span><span class="s0">activeSetter(self): 
+        self.active = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+    </span><span class="s3">def </span><span class="s0">activate(self, arch): 
+        </span><span class="s2"># Test in Code</span><span class="s0"> 
+        parsedEffect = self.active.split(); 
+        </span><span class="s2"># swap roomID sceneID</span><span class="s0"> 
+        </span><span class="s3">if </span><span class="s0">parsedEffect[</span><span class="s4">0</span><span class="s0">] == </span><span class="s1">&quot;swap&quot;</span><span class="s0">: 
+            roomRef = arch.rooms[parsedEffect[</span><span class="s4">1</span><span class="s0">]]; 
+            roomRef.currentScene = int(parsedEffect[</span><span class="s4">2</span><span class="s0">]); 
+        </span><span class="s3">if </span><span class="s0">parsedEffect[</span><span class="s4">0</span><span class="s0">] == </span><span class="s1">&quot;goto&quot;</span><span class="s0">: 
+            arch.currentRoom = parsedEffect[</span><span class="s4">1</span><span class="s0">]; 
+        </span><span class="s3">if </span><span class="s0">parsedEffect[</span><span class="s4">0</span><span class="s0">] == </span><span class="s1">&quot;print&quot;</span><span class="s0">: 
+            print(parsedEffect[</span><span class="s4">1</span><span class="s0">]); 
+        </span><span class="s3">if </span><span class="s0">parsedEffect[</span><span class="s4">0</span><span class="s0">] == </span><span class="s1">&quot;node&quot;</span><span class="s0">: 
+            </span><span class="s2"># node roomID sceneID nodeNumber eventNum NewEventID</span><span class="s0"> 
+            roomRef = arch.rooms[parsedEffect[</span><span class="s4">1</span><span class="s0">]]; 
+            activeNode = roomRef.roomScenes[int(parsedEffect[</span><span class="s4">2</span><span class="s0">])].sceneNodes[int(parsedEffect[</span><span class="s4">3</span><span class="s0">])]; 
+            activeNode.name = self.name; 
+            activeNode.nodeEvents[int(parsedEffect[</span><span class="s4">4</span><span class="s0">])] = arch.events[parsedEffect[</span><span class="s4">5</span><span class="s0">]]; 
+ 
+</span><span class="s2"># Methods</span><span class="s0"> 
+</span><span class="s3">def </span><span class="s0">main(): 
+ 
+ 
+    console = </span><span class="s1">&quot;&quot;</span><span class="s0">; 
+    arch = archive(); 
+    arch.currentRoomSetter(); 
+    arch.events = eventScrivner(); 
+    arch.nodes = nodeScrivner(arch); 
+    arch.scenes = sceneScrivner(arch); 
+    arch.rooms = roomScrivner(arch); 
+    </span><span class="s3">while </span><span class="s0">console != </span><span class="s1">&quot;q&quot;</span><span class="s0">: 
+        load(arch,arch.currentRoom); 
+        console = input(</span><span class="s1">&quot;</span><span class="s3">\n</span><span class="s1">What do you do?</span><span class="s3">\n</span><span class="s1">&quot;</span><span class="s0">); 
+        </span><span class="s3">try</span><span class="s0">: 
+            choiceNum = int(console); 
+            </span><span class="s2"># playerChoice translates choice num into the</span><span class="s0"> 
+            </span><span class="s2"># index of the option the player selected.</span><span class="s0"> 
+            playerChoice = int(choiceNum) - </span><span class="s4">1</span><span class="s0">; 
+            theScene = arch.rooms[arch.currentRoom].roomScenes[arch.rooms[arch.currentRoom].currentScene] 
+            </span><span class="s3">if </span><span class="s0">playerChoice == len(theScene.sceneNodes): 
+                print(theScene.examine); 
+                console = input(</span><span class="s1">&quot;</span><span class="s3">\t</span><span class="s1">continue...&quot;</span><span class="s0">); 
+            </span><span class="s3">else</span><span class="s0">: 
+                theScene.sceneNodes[playerChoice].activateNode(arch); 
+        </span><span class="s3">except </span><span class="s0">ValueError: 
+            </span><span class="s3">if </span><span class="s0">console != </span><span class="s1">&quot;q&quot;</span><span class="s0">: 
+                print(</span><span class="s1">&quot;Sorry, please enter a number or 'q' to quit.&quot;</span><span class="s0">); 
+        </span><span class="s3">except </span><span class="s0">IndexError: 
+            print(</span><span class="s1">&quot;The range was off. There is/are only &quot;</span><span class="s0">+str(len(theScene.sceneNodes))+</span><span class="s1">&quot; choices in this scene, not including an examine option.&quot;</span><span class="s0">); 
+ 
+</span><span class="s3">def </span><span class="s0">load(loadArch, loadArchRoom): 
+    thisRoom = loadArch.rooms[loadArchRoom]; 
+    thisScene = thisRoom.roomScenes[thisRoom.currentScene]; 
+    print(thisScene.name); 
+    print(thisScene.text); 
+    num = </span><span class="s4">1</span><span class="s0">; 
+    </span><span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s0">range(</span><span class="s4">0</span><span class="s0">,len(thisScene.sceneNodes)): 
+        print(</span><span class="s1">&quot;</span><span class="s3">\t</span><span class="s1">&quot;</span><span class="s0">+str(i+</span><span class="s4">1</span><span class="s0">)+</span><span class="s1">&quot;: &quot;</span><span class="s0">+thisScene.sceneNodes[i].name); 
+        num += </span><span class="s4">1</span><span class="s0">; 
+    </span><span class="s3">if </span><span class="s0">thisScene.examine != </span><span class="s1">&quot;&quot;</span><span class="s0">: 
+        print(</span><span class="s1">&quot;</span><span class="s3">\t</span><span class="s1">&quot;</span><span class="s0">+str(num)+</span><span class="s1">&quot;: Examine.&quot;</span><span class="s0">); 
+ 
+</span><span class="s2"># eventScrivner - returns a dictionary of events, events read from a file called events.txt</span><span class="s0"> 
+</span><span class="s3">def </span><span class="s0">eventScrivner(): 
+    inFile = open(</span><span class="s1">&quot;events.txt&quot;</span><span class="s0">,</span><span class="s1">&quot;r&quot;</span><span class="s0">); 
+    line = inFile.readline().rstrip(); 
+    events = {}; 
+    </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;ENDEVENTS&quot;</span><span class="s0">: 
+        line = inFile.readline().rstrip(); 
+        tempEvent = event(); 
+        tempEvent.idSetter(); 
+        tempEvent.nameSetter(); 
+        tempEvent.activeSetter(); 
+        </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endevent&quot; </span><span class="s3">and </span><span class="s0">line != </span><span class="s1">&quot;ENDEVENTS&quot;</span><span class="s0">: 
+            </span><span class="s2"># print(line);</span><span class="s0"> 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;id  :&quot;</span><span class="s0">: 
+                tempEvent.ID = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;name:&quot;</span><span class="s0">: 
+                tempEvent.name = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;acti:&quot;</span><span class="s0">: 
+                tempEvent.active = line[</span><span class="s4">6</span><span class="s0">:]; 
+            line = inFile.readline().rstrip(); 
+        events[tempEvent.ID] = tempEvent; 
+    inFile.close(); 
+    </span><span class="s3">return </span><span class="s0">events; 
+ 
+</span><span class="s2"># nodeScrivner - returns a dictionary of nodes.</span><span class="s0"> 
+</span><span class="s3">def </span><span class="s0">nodeScrivner(archNodes): 
+    inFile = open(</span><span class="s1">&quot;nodes.txt&quot;</span><span class="s0">,</span><span class="s1">&quot;r&quot;</span><span class="s0">); 
+    line = inFile.readline().rstrip(); 
+    nodes = {}; 
+    </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;ENDNODES&quot;</span><span class="s0">: 
+        </span><span class="s2"># print(line);</span><span class="s0"> 
+        line = inFile.readline().rstrip(); 
+        tempNode = node(); 
+        tempNode.idSetter(); 
+        tempNode.nameSetter(); 
+        tempNode.eventsSetter(); 
+        </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endnode&quot; </span><span class="s3">and </span><span class="s0">line != </span><span class="s1">&quot;ENDNODES&quot;</span><span class="s0">: 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;id  :&quot;</span><span class="s0">: 
+                tempNode.ID = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;name:&quot;</span><span class="s0">: 
+                tempNode.name = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;even:&quot;</span><span class="s0">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endeven&quot;</span><span class="s0">: 
+                    </span><span class="s2">#print(line);</span><span class="s0"> 
+                    tempNode.nodeEvents.append(archNodes.events[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        nodes[tempNode.ID] = tempNode; 
+    inFile.close(); 
+    </span><span class="s3">return </span><span class="s0">nodes; 
+ 
+</span><span class="s3">def </span><span class="s0">sceneScrivner(archScenes): 
+    inFile = open(</span><span class="s1">&quot;scenes.txt&quot;</span><span class="s0">,</span><span class="s1">&quot;r&quot;</span><span class="s0">); 
+    line = inFile.readline().rstrip(); 
+    scenes = {}; 
+    </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;ENDSCENES&quot;</span><span class="s0">: 
+        line = inFile.readline().rstrip(); 
+        tempScene = scene(); 
+        tempScene.idSetter(); 
+        tempScene.nameSetter(); 
+        tempScene.textSetter(); 
+        tempScene.nodeSetter(); 
+        tempScene.examSetter(); 
+        </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endscene&quot; </span><span class="s3">and </span><span class="s0">line != </span><span class="s1">&quot;ENDSCENES&quot;</span><span class="s0">: 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;id  :&quot;</span><span class="s0">: 
+                tempScene.ID = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;name:&quot;</span><span class="s0">: 
+                tempScene.name = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;text:&quot;</span><span class="s0">: 
+                tempScene.text = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;exam:&quot;</span><span class="s0">: 
+                tempScene.examine = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;node:&quot;</span><span class="s0">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endnodes&quot;</span><span class="s0">: 
+                    </span><span class="s2"># print(line);</span><span class="s0"> 
+                    tempScene.sceneNodes.append(archScenes.nodes[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        scenes[tempScene.ID] = tempScene; 
+    inFile.close(); 
+    </span><span class="s3">return </span><span class="s0">scenes; 
+ 
+</span><span class="s3">def </span><span class="s0">roomScrivner(archRooms): 
+    inFile = open(</span><span class="s1">&quot;rooms.txt&quot;</span><span class="s0">,</span><span class="s1">&quot;r&quot;</span><span class="s0">); 
+    line = inFile.readline().rstrip(); 
+    rooms = {}; 
+    </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;ENDROOMS&quot;</span><span class="s0">: 
+        line = inFile.readline().rstrip(); 
+        tempRoom = room(); 
+        tempRoom.idSetter(); 
+        tempRoom.nameSetter(); 
+        tempRoom.sceneSetter(); 
+        tempRoom.currentSceneSetter(); 
+        </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endroom&quot; </span><span class="s3">and </span><span class="s0">line != </span><span class="s1">&quot;ENDROOMS&quot;</span><span class="s0">: 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;id  :&quot;</span><span class="s0">: 
+                tempRoom.ID = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;name:&quot;</span><span class="s0">: 
+                tempRoom.name = line[</span><span class="s4">6</span><span class="s0">:]; 
+            </span><span class="s3">if </span><span class="s0">line[</span><span class="s4">0</span><span class="s0">:</span><span class="s4">5</span><span class="s0">] == </span><span class="s1">&quot;scen:&quot;</span><span class="s0">: 
+                line = inFile.readline().rstrip(); 
+                </span><span class="s3">while </span><span class="s0">line != </span><span class="s1">&quot;endscenes&quot;</span><span class="s0">: 
+                    </span><span class="s2"># print(line);</span><span class="s0"> 
+                    tempRoom.roomScenes.append(archRooms.scenes[line]); 
+                    line = inFile.readline().rstrip(); 
+            line = inFile.readline().rstrip(); 
+        rooms[tempRoom.ID] = tempRoom; 
+    inFile.close(); 
+    </span><span class="s3">return </span><span class="s0">rooms; 
+ 
+main(); 
+</span></pre>
+</body>
+</html>

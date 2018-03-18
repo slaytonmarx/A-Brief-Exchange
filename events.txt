@@ -1,0 +1,163 @@
+EVENTS TEXT FILE
+
+# Change room current scene:
+swap roomID sceneID
+
+# Change room:
+goto roomID
+
+# Print onscreen:
+print message.
+
+# Change node current:
+node roomID sceneNum nodeNum eventNum NewEventID
+
+id  : blancha
+name:
+acti:
+endevent
+
+id  : swapR0S1Event
+name: Introduction continue
+acti: swap room0 1
+endevent
+
+id  : gotoR1IntroEvent
+name: Begins the game
+acti: goto room1
+endevent
+
+id  : nodeOpenLetterEvent
+name: Read the Letter from the DGS
+acti: node room1 2 3 0 swapR1S341Event
+endevent
+
+id  : swapR1S2Event
+name: continues intro.
+acti: swap room1 1
+endevent
+
+id  : swapR1S3Event
+name: finishes intro and ends on desk.
+acti: swap room1 2
+endevent
+
+id  : swapR1S31Event
+name: looks at picture.
+acti: swap room1 3
+endevent
+
+id  : swapR1S32Event
+name: looks at case file.
+acti: swap room1 4
+endevent
+
+id  : swapR1S321Event
+name: continues case file.
+acti: swap room1 5
+endevent
+
+id  : swapR1S322Event
+name: finishes case file.
+acti: swap room1 6
+endevent
+
+id  : swapR1S33Event
+name: Reads letter of revocation.
+acti: swap room1 7
+endevent
+
+id  : swapR1S331Event
+name: finishes revocation letter.
+acti: swap room1 8
+endevent
+
+id  : swapR1S34Event
+name: Opens the letter to maim.
+acti: swap room1 9
+endevent
+
+id  : swapR1S341Event
+name: Reads letter to maim.
+acti: swap room1 10
+endevent
+
+id  : swapR2S2Event
+name: Changes room 2
+acti: swap room2 1
+endevent
+
+id  : gotoR2Event
+name: jumps to room 2.
+acti: goto room2
+endevent
+
+id  : gotoR1Event
+name: jumps to room 1.
+acti: goto room1
+endevent
+
+id  : gotoR3Event
+name: jumps to room 3
+acti: goto room3
+endevent
+
+id  : swapR3S2Event
+name: changes room 3 to scene 2
+acti: swap room3 1
+endevent
+
+id  : swapR3S3Event
+name: changes room 3 to scene 3
+acti: swap room3 2
+endevent
+
+id  : gotoR4Event
+name: Goes to Room 4
+acti: goto room4
+endevent
+
+id  : gotoR5Event
+name: Goes to Room 5
+acti: goto room5
+endevent
+
+id  : swapR4S2Event
+name: changes room 4 to scene 2
+acti: swap room4 1
+endevent
+
+id  : swapR4S3Event
+name: changes room 4 to scene 3
+acti: swap room4 2
+endevent
+
+id  : swapR4S4Event
+name: changes room 4 to scene 4
+acti: swap room4 3
+endevent
+
+id  : swapR4S5Event
+name: changes room 4 to scene 5
+acti: swap room4 4
+endevent
+
+id  : swapR4S6Event
+name: changes room 4 to scene 6
+acti: swap room4 5
+endevent
+
+id  : swapR4S7Event
+name: changes room 4 to scene 7
+acti: swap room4 6
+endevent
+
+id  : swapR4S8Event
+name: changes room 4 to scene 8
+acti: swap room4 7
+endevent
+
+id  : testEvent
+name: tests whether it even works!
+acti: print Duuuuude
+ENDEVENTS

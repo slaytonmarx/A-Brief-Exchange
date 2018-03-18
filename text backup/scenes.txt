@@ -1,0 +1,250 @@
+SCENES TEXT FILE
+
+id  : Blanca
+name:
+text:
+exam:
+node:
+endnodes
+endscene
+
+id  : r0s0
+name: Welcome to "A Brief Exchange"
+text: Hi, welcome to "A Brief Exchange," our project for the CS Fair this year. Rose and I (Slayton) have put together a small comedy text adventure for your enjoyment. You play the role of Rick Hardboiled, a loose cannon renegade cop, too wild for the city police department. You have been working as a private investigator in North West Maltese City for 35 years and today is your 36th birthday. Grab your trusty revolver and pack of cigars, because the night has only just begun. Type '1' in the white box and press the "Engage" button.
+node:
+swapR0S1Node
+endnodes
+endscene
+
+id  : r0s1
+name: Controls
+text: The controls are simple. Whatever location you're in you'll be given a description of the situation and a list of commands underneath it. Simply enter the number corresponding to the command you want to enact and click the engage button. Sometimes you'll be given the option to "Examine" a given scene, if you select this option you'll only have to press Engage again to continue the game. Finally, if you find you've returned to any scenes you were previously in don't worry, some locations (like your office) can be returned to at multiple points in the game.
+exam:
+node:
+gotoR1IntroNode
+endnodes
+endscene
+
+id  : r1s1
+name: Your Office.
+text: It’s always raining in North West Maltese Neo Noir City, how did a hardboiled detective like you, Rick Hardboiled end up here? Standing in your office, you hear a siren blare down the street through your detective hat and slabs of five o’clock shadow, "just another night" you grumble in a voice deep enough to shame blue whales. Just another night indeed. You chain smoke a pack of cigarettes.
+node:
+swapR1S2Node
+endnodes
+endscene
+
+id  : r1s2
+name: Your Office.
+text: You walk back over to your chair and sit in it. “Ahhh, feel that comfortable plush seating” you might have said, were it not for the trench coat and chain smoking keeping you from enjoying life’s simple pleasures. No, only the most hazardous hooch can excite Rick Hardboiled, deadly dames and criminal masterminds. Your thoughts whirl with anticipation, better read that case file you got yesterday and get to work.
+node:
+swapR1S3Node
+endnodes
+endscene
+
+DESK SCENE
+id  : r1s3
+name: Your Office
+text: Your desk is cluttered with years of case files, whisky bottles, cigar buds, bullet cartridges, and love letters tragically unopened because you knew you'd be the worst mistake they'd ever made. You need to hire a secretary. You hollowed out an enclosure for the most important scraps.
+node:
+swapR1S31Node
+swapR1S32Node
+swapR1S33Node
+swapR1S34Node
+gotoR2Node
+endnodes
+endscene
+
+id  : r1s31
+name: That Damn Picture
+text: It’s a picture of your ex-wife, Rochle la Blanche in her signature red dress and firing range attire. God, you miss her, she was the first woman to leave you at the altar and by your judgement, the one who made it fashionable. You still remember that day vividly. You in your best marriage trench coat, her in that mascot costume, but then, twelve bangs as she pulled the trigger, leaving you with nothing but twelve bullet holes in your right thigh and a broken heart. If your hardboiled self was an egg, then that was what left you the empty shell of a man you are today.
+node:
+swapR1S3Node
+endnodes
+endscene
+
+id  : r1s32
+name: The Case File
+text: Your most recent case, no two tone peanut affair. You remember it like it was yesterday, somebody by the name of H. B. didn’t say no more, plunged through your second story window from the street with nothing but a trench coat, tommy gun, and case file in hand. Locking eyes with you in a way only two hardboiled gum-shoes can, he tossed the case file onto your desk before plunging back down to the street through your other window. Your fee would be a double sawbuck and two glass windows. The usual.
+node:
+swapR1S321Node
+endnodes
+endscene
+
+id  : r1s32
+name: The Case File
+text: Your most recent case, no two tone peanut affair. You remember it like it was yesterday, somebody by the name of H. B. didn’t say no more, plunged through your second story window from the street with nothing but a trench coat, tommy gun, and case file in hand. Locking eyes with you in a way only two hardboiled gum-shoes can, he tossed the case file onto your desk before plunging back down to the street through your other window. Your fee would be a double sawbuck and two glass windows. Like always.
+node:
+swapR1S321Node
+endnodes
+endscene
+
+id  : r1s321
+name: The Case File
+text: The case file itself read “Rick Hardboiled, STOP. H. B. Hiring you STOP. Trouble at Night Market STOP. Johny “The Typist” Reynolds to blame STOP. Bring em here STOP. Will pay usual fee STOP. Throw in new whiskey if you take him alive, STOP.
+node:
+swapR1S322Node
+endnodes
+endscene
+
+id  : r1s322
+name: The Case File
+text: The Night Market, nowhere else in North Neo West Casablanca could you find such a wretched hive of scum and villainy. If H. B. wanted you to get Johny Reynolds from there, he wanted him bad. And Rick Hardboiled would deliver.
+node:
+swapR1S3Node
+endnodes
+endscene
+
+id  : r1s33
+name: Your Desk
+text: A letter of revocation of one Richardio Gunsmoke Hardboiled’s licence to kill, signed by the police commissioner himself. The letter is worn paper smelling of nicotine and aftershave, the commissioner really was a man’s man, it reads “Hardboiled, I’m gonna skin ya. Everybody knows you’re a renegade loose cannon cop, but after what happened at the shaving cream and cigar factory it’s obvious you’re too loose cannon for the force and too loose cannon for neo noir double blind city. It is with sick pleasure I revoke your license to kill, I hope you rot you grizzled, but mysteriously compelling crook."
+exam: You bring the letter up to your nose and take a deep breath of that aftershave. Your titanium hair follicles, usually harder than the devil in the pale moonlight, shrink in fear of whatever angelic razor the chief must use to style his own formidable stache.
+node:
+swapR1S331Node
+endnodes
+endscene
+
+id  : r1s331
+name: Your Thoughts.
+text: Always kind words from the chief. If you had a secretary you’d ask them to prepare a Christmas card for him. Not that it was ever Christmas in neo noir ultra black coffee city, only shutter blinds and revolvers year round.
+node:
+swapR1S3Node
+endnodes
+endscene
+
+id  : r1s34
+name: Your Desk
+text: An Unopened Letter from the Department of Gum-Shoes (DGS). Removing your trusty butterfly knife from your left nostril you open the letter with the finesse of a surgeon, ballerina, and cheetah all at once. The letter falls gently onto your desk as well as a badge which you pocket into your trench coat.
+node:
+swapR1S341Node
+endnodes
+endscene
+
+id  : r1s341
+name: Your Desk
+text: You pick up the letter and read it: “Dear Detective Hardboiled, this is a formal letter from the DGS validating your request for a license to maim, the good folks here see no reason why a loose cannon cop like you shouldn’t have the express ability to main at your discretion. Enclosed is your license, use it well.” The DGS at it’s finest.
+node:
+swapR1S3Node
+endnodes
+endscene
+
+id  : r2s1
+name: The Hallway
+text: You walk out into your hallway, confused but no more than always. You smoke a pack of cigarettes to get some clarity and maybe make sense of it all. Where did it all go so wrong? Where did you have to go again? You don’t remember, maybe you should read your case file.
+exam: More like examine your life. Were you always a chain smoking, alcoholic Rick? "Yes" your brain answers. "Ever since I had my first nip of whisky 36 years ago... I'm thirty seven" your brain continues. Anyway, better go back inside and check the case file.
+node:
+gotoR1Node
+endnodes
+endscene
+
+id  : r2s2
+name: The Hallway
+text: Your hallway, sexiest of all rooms in the grey office building you call home. Right over there by that water cooler is where you had your first kiss at the bright young age of 25, you were so naive back then, so new to it all, and like the crime scene of a fresh murder you had only a chalk outline and a few clues to go on. But enough reminiscing…
+exam: Your hallway is grey, much like the rest of your office building which is also grey, steel grey, just like your gum-shoe soul. The door to your office is the only one that sticks out to you, it’s also the only one you have a key for. There’s also the staircase to the garage.
+node:
+gotoR1Node
+gotoR3Node
+endnodes
+endscene
+
+id  : r3s1
+name: The Garage
+text: “I love the smell of motor oil in the evening” you express to the empty garage through interpretive dance. You saunter your way over to your car, a black cattleack with upholstery to shame Corinth, just how you like it.
+exam: You lean into the car and gently rub your face against. Feel that polished steel. If you were to imagine yourself as a car, you would be this car, this color, this… polished steel. But be careful cowboy, if you get too close your titanium beard hairs could scratch up the paint job. You snort a pack of cigarettes and reluctantly withdraw yourself. You’ll just have to settle for driving it.
+node:
+swapR3S2Node
+endnodes
+endscene
+
+id  : r3s2
+name: The Mean Streets
+text: You pull out of the parking garage and glide, headlights blaring, onto the streets of Fictional Pulp City. The street’s slicker than the hair gel of a used car salesman’s pet rat, and you’re the barber. Time to make some sense of this sin city gone wild and maybe trim some of the less civically productive hairs, if you get your meaning. You do.
+node:
+swapR3S3Node
+endnodes
+endscene
+
+id  : r3s3
+name: The Mean Streets
+text: How did we get here? When did Neo Noir City become such a proverbial, and literal dump. “This city is on the precipice of disaster” a hard-boiled but distinctly different from your voice laments. “Like a paper boat caught in a storm, speeding towards the sewage drain of anarchy, we sail onward” it continues. “But hey, you take it one day at a time” the narrator concludes with fatalistic determination. Man, you love that guy.
+node:
+gotoR4Node
+endnodes
+endscene
+
+id  : r4s1
+name: Entrance to the Night
+text: After 20 minutes of speeding faster than the second hand on a doomsday clock you finally arrive at the entrance to the Night Market. Parking your car in an unassuming alley way you peer down the street to the entrance of an old subway tunnel. You remember when the Neoblade Noirunner City Subway line was first commissioned by the mob, built by the mob, and set on fire by the mob in an intricate insurance fraud scheme all in the same night. You chain smoke a pack of cigarettes to recreate the smell of that blaze.
+node:
+swapR4S2Node
+endnodes
+endscene
+
+id  : r4s2
+name: Entrance to the Night
+text: You pull your trench coat a little closer to you body and pop your collar to obscure your face, it’s time to get on the move. But wait, as you turn the corner to walk down the street you notice a gang of real happy trigger men smoking cigars right next to the entrance. What do you do?
+exam: The triggermen look mean, and true to their name they’re packing heat.
+node:
+swapR4S3Node
+swapR4S4Node
+swapR4S5Node
+endnodes
+endscene
+
+id  : r4s3
+name: Entrance to the Night Market
+text: Time to deftly sneak past these suspicious ne'er-do-wells in a manner only Rick Hardboiled can. Using your incredible, steely determination and titanium chin follicles you crouch to the ground and begin vibrating your chin. Soon the concrete itself is torn asunder and you quickly tunnel your way under the problem, surfacing next to the entrance. The trigger men glance at you as you rise from the newly torn up street and grimace. They know when they’re outmatched and outsnuck.
+node:
+swapR4S6Node
+endnodes
+endscene
+
+id  : r4s4
+name: Entrance to the Night Market
+text: Adjusting your spine and shoulder bones in a manner congruent with the current fashion, you saunter on over to the triggermen in a lurching pace. Looking up from their cigars and issues of “Guns and Ammo” one of the triggermen looks you in the eye and begins making deep warbling sounds with his tonsils. “Ah, the traditional Chicago goosegreet. I know it well,” you think before echoing with a warble of your own. The other triggermen join with their own warbling, what a sight this is! With a polite wink you leave the triggermen to their revery and approach the Night Market’s door.
+node:
+swapR4S6Node
+endnodes
+endscene
+
+id  : r4s5
+name: Entrance to the Night Market
+text: You walk by the trigger men without issue, looks like the really weren’t looking for trouble. Perhaps a little disappointed you saunter on over directly to the front door of the Night Market.
+node:
+swapR4S6Node
+endnodes
+endscene
+
+id  : r4s6
+name: At the Door
+text: Holding your breath and trilling a high pitch note like a kitten you knock eleven times on the steel door of the unassuming subway entrance. Without missing a step you launch into the full dance number of Goodmorning Baltimore from the movie hairspray before taking out your pistol and firing ten times into the air. When the ringing of the shots finally leaves your ear the door lurches open a crack and you can make out a woman, that must be Glenda the doorman. “Ahoy sailor, what brings you to Wacky Wallies Hardware Emporium?” She says.
+exam: Glenda’s in that weird place between dame to kill for and dame you want dead and out of this state, in that order. Her tough eyebrows are solid xenon and her karate gi is, without fail spotless despite all the grime of Neo-noir city, both human and otherwise. A long time ago, in another life, you think you probably did a job with her for your occasional mutual employer, Wacky Wally. It was only after that job, a botched raid on some scumbag orphan dope dealers that you swore never to work for Wacky Wally again. At the end he ordered you to burn the whole place down, you reluctantly agreed because you were a bastard, but Glenda well, all she did was smile.
+node:
+swapR4S7Node
+endnodes
+endscene
+
+id  : r4s7
+name: At the Door
+text: “My tummy has the grumblies that only fans can satisfy.” You say under your breath. She nods and slams the door in your face, classic Glenda. After a couple breaths of your cigar you hear a hundred and seventeen locks click and the door swings open again. “Get inside quickly, before someone sees you,” she says. “No one get’s the drop on Rick Hardboiled,” you say with confidence. She rolls her eyes and leads you down the stairs.
+exam:
+node:
+swapR4S8Node
+endnodes
+endscene
+
+id  : r4s8
+name: The Night Market
+text: Descending into the Night Market is like walking head first with a hangover through Hieronymous Bosch’s Garden of Earthly Delights. Scents of all and waft up your nostrils only to go completely ignored by your nicotine addled brain. Hundreds of people push past each other, frantically looking for the best deal and curtains and light cover every open surface of the space. “It’s like someone misted the Chicago Stock Exchange with amphetamine,” you quip. Glenda snorts in acknowledgement and then leaves you at the stairs, returning to her post upstairs.
+node:
+gotoR5Node
+endnodes
+endscene
+
+id  : r5s1
+name: GAME END!
+text: Thank you for playing “A Brief Exchange,” unfortunately this concludes the first part of Rick Hardboiled’s quests to stop Johny “the Typist” Reynolds. Tune in again at the next CS: Fair for part 2 “In the Belly of the Beast.”
+node:
+endnodes
+endscene
+
+ENDSCENES

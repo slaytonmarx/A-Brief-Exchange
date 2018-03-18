@@ -1,0 +1,65 @@
+ROOMS TEXT FILE
+
+id  : room0
+name: Introduction
+scen:
+r0s0
+r0s1
+endscenes
+endroom
+
+id  : room1
+name: Your Office
+scen:
+r1s1
+r1s2
+r1s3
+r1s31
+r1s32
+r1s321
+r1s322
+r1s33
+r1s331
+r1s34
+r1s341
+endscenes
+endroom
+
+id  : room2
+name: Second Room
+scen:
+r2s1
+r2s2
+endscenes
+endroom
+
+id  : room3
+name: Third Room
+scen:
+r3s1
+r3s2
+r3s3
+endscenes
+endroom
+
+id  : room4
+name: Fourth Room
+scen:
+r4s1
+r4s2
+r4s3
+r4s4
+r4s5
+r4s6
+r4s7
+r4s8
+endscenes
+endroom
+
+id  : room5
+name: Fourth Room
+scen:
+r5s1
+endscenes
+endroom
+ENDROOMS
